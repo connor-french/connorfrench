@@ -1,0 +1,22 @@
+---
+title: Polyploid evolution
+author: Connor French
+date: '2019-10-05'
+slug: polyploid-evolution
+categories: []
+tags:
+  - Polyploidy
+  - Genetics
+  - Atlantic Forest
+subtitle: ''
+summary: ''
+authors: [Connor French]
+lastmod: '2019-10-05T20:04:27-04:00'
+featured: no
+image:
+  caption: 'Phyllomedusa tetraploidea. Gionorossi [CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)]'
+  focal_point: Smart
+  #preview_only: no
+projects: []
+---
+Whole genome duplications (WGD) have contributed significantly to the diversification of major plant and animal lineages. How WGD occurs can have a profound influence on the resulting lineage's evolutionary history. Generalizations about how WGD formation influences evolutionary processes in lineages that have retained their duplicated genome, i.e. polyploid species, are limited by the field's focus on a few target systems. The accelerating discovery of polyploidy in lineages previously thought to harbor few polyploid species prompts the investigation of how these lineages arose and how WGD has influenced their subsequent evolution. That is why I am investigating the origins and evolutionary response of WGD in a tetraploid-diploid species pair of frogs from the Brazilian Atlantic Forest.

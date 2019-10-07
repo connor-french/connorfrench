@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Connor M. French</title>
+    <link>/</link>
+      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <description>Connor M. French</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Connor M. French</title>
+      <link>/</link>
+    </image>
+    
+    <item>
+      <title>Example Page 1</title>
+      <link>/courses/example/example1/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/example/example1/</guid>
+      <description>
+
+&lt;p&gt;In this tutorial, I&amp;rsquo;ll share my top 10 tips for getting started with Academic:&lt;/p&gt;
+
+&lt;h2 id=&#34;tip-1&#34;&gt;Tip 1&lt;/h2&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+
+&lt;h2 id=&#34;tip-2&#34;&gt;Tip 2&lt;/h2&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Example Page 2</title>
+      <link>/courses/example/example2/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/example/example2/</guid>
+      <description>
+
+&lt;p&gt;Here are some more tips for getting started with Academic:&lt;/p&gt;
+
+&lt;h2 id=&#34;tip-3&#34;&gt;Tip 3&lt;/h2&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+
+&lt;h2 id=&#34;tip-4&#34;&gt;Tip 4&lt;/h2&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Example Talk</title>
+      <link>/talk/example/</link>
+      <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
+      <guid>/talk/example/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Slides can be added in a few ways:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Create&lt;/strong&gt; slides using Academic&amp;rsquo;s &lt;a href=&#34;https://sourcethemes.com/academic/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;Slides&lt;/em&gt;&lt;/a&gt; feature and link using &lt;code&gt;slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Upload&lt;/strong&gt; an existing slide deck to &lt;code&gt;static/&lt;/code&gt; and link using &lt;code&gt;url_slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Embed&lt;/strong&gt; your slides (e.g. Google Slides) or presentation video on this page using &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Further talk details can easily be added to this page using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>PDIG Training Grant Spotlight: Connor French</title>
+      <link>/post/pdig-training-grant-spotlight-connor-french/</link>
+      <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/post/pdig-training-grant-spotlight-connor-french/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;There are a lot of insects in the world. Like a lot a lot. Recent estimates put &lt;/span&gt;&lt;a href=&#34;https://www.pnas.org/content/112/24/7519.short&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;the number of insect species&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; at a whopping 5.5 million. Only about a million have names, leaving the other 4.5 million or so species undescribed. To put this into context, there are &lt;/span&gt;&lt;a href=&#34;https://amphibiaweb.org/amphibian/speciesnums.html&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;8,053 described amphibian species&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; and the projected number of undescribed species remains in the thousands. While I consider all life to be equally important (and I’m particularly fond of amphibians- I mean, just &lt;/span&gt;&lt;a href=&#34;https://www.google.com/search?rlz=1C5CHFA_enUS832US832&amp;amp;biw=1343&amp;amp;bih=650&amp;amp;tbm=isch&amp;amp;sa=1&amp;amp;ei=6XpJXc7tOayv_Qac8oGQBA&amp;amp;q=ranitomeya&amp;amp;oq=ranitomeya&amp;amp;gs_l=img.3..35i39l2j0i67l2j0l6.53933.55501..55948...0.0..1.371.943.9j3-1......0....1..gws-wiz-img.ujvBzQEfoC8&amp;amp;ved=0ahUKEwiOhpG-p-7jAhWsV98KHRx5AEIQ4dUDCAY&amp;amp;uact=5&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;look at these&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;), the gap in our understanding of insect diversity is especially concerning. They’re important for &lt;/span&gt;&lt;a href=&#34;https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/plantsanimals/pollinate/&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;agriculture&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;, &lt;/span&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=S0qm_L_HPdM&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;flowering plants&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;, &lt;/span&gt;&lt;a href=&#34;https://www.fws.gov/midwest/endangered/insects/ambb/abb_fact.html&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;decomposition&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;, and a host of other functions. Without a firm understanding of existing insect diversity, scientists can’t accurately determine the causes of &lt;/span&gt;&lt;a href=&#34;https://www.nationalgeographic.com/animals/2019/02/why-insect-populations-are-plummeting-and-why-it-matters/&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;rapid declines&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; in insect populations across the globe. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;Needless to say, describing 4.5 million species of insect is an onerous task. That’s why, as part of my PhD dissertation, I’m devising a new metric of diversity that skirts around this problem. Although I would love to go into excruciating detail about what it is, I’ll leave that up to my dissertation chapter. Briefly, I use &lt;/span&gt;&lt;a href=&#34;https://www.genome.gov/about-genomics/fact-sheets/DNA-Sequencing-Fact-Sheet&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;DNA sequences&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; from insects collected by researchers from &lt;/span&gt;&lt;a href=&#34;http://www.boldsystems.org/&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;across the globe&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; to summarize the &lt;/span&gt;&lt;a href=&#34;http://b4fa.org/bioscience-in-brief/plantbreeding/genetic-diversity/&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;genetic diversity&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; of insect communities, rather than their species diversity. This makes data collection much more feasible across a broad scale. However, exactly what it tells us about insect communities is still uncertain.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&#34;wp-image-11278&#34; src=&#34;https://gcdi.commons.gc.cuny.edu/wp-content/blogs.dir/885/files/2019/09/bold_insects-300x150.png&#34; alt=&#34;Global map of insect DNA sampling intensity&#34; width=&#34;410&#34; height=&#34;205&#34; /&gt; &lt;font size=&#34;-1&#34;&gt; A map of insect DNA sequences deposited in the Barcode of Life Data System. Warmer colors indicate densely sampled areas. &lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;To remedy this, I’m using &lt;/span&gt;&lt;a href=&#34;https://searchenterpriseai.techtarget.com/definition/machine-learning-ML&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;machine learning&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;. Machine learning, the part-statistics, part-algorithmic wizardry that helps Snapchat &lt;/span&gt;&lt;a href=&#34;https://medium.com/cracking-the-data-science-interview/snapchats-filters-how-computer-vision-recognizes-your-face-9907d6904b91&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;turn your face into an alien&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; and Facebook &lt;/span&gt;&lt;a href=&#34;https://research.fb.com/blog/category/machine-learning/&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;recommend you&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; custom underwear, can also be used to answer important scientific questions. In a &lt;/span&gt;&lt;a href=&#34;https://www.theguardian.com/news/2018/mar/12/what-is-biodiversity-and-why-does-it-matter-to-us&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;biodiversity&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; context, machine learning can help clarify what about the environment, whether that is climate, topography, human-mediated habitat loss, etc., best predicts a selected metric of diversity. In my project planning stages, I decided to use this approach to assess the relationships my new metric has with other global-scale processes. However, I only had a rudimentary knowledge of the capabilities of a machine learning approach. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;That’s why I decided to take the &lt;/span&gt;&lt;a href=&#34;https://blog.rstudio.com/2019/02/06/rstudio-conf-2019-workshops/&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;Applied Machine Learning in R&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; two-day workshop in Austin, Texas. The workshop’s goal was to “step through the process of building, visualizing, testing, and comparing models that are based on prediction.” This was exactly what I needed. Unfortunately, since it was a part of an industry conference for tech professionals, the &lt;/span&gt;&lt;a href=&#34;https://www.rstudio.com/conference/&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;rstudio::conf2019&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;, it was prohibitively expensive. Luckily, I was able to secure a &lt;/span&gt;&lt;a href=&#34;https://digitalgrants.commons.gc.cuny.edu/&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;Provost’s Digital Innovation Training Grant&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;, which covered the costly tuition. As a University of Texas at Austin alumni, I easily found a couch to crash on, which cut expenses significantly. The prime location and generous help from the &lt;/span&gt;&lt;a href=&#34;https://gcdi.commons.gc.cuny.edu/&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;GC Digital Initiatives&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; paved my way to the workshop. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;In between eating &lt;/span&gt;&lt;a href=&#34;http://www.vaquerotaquero.com/&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;street tacos&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; and taking dips at &lt;/span&gt;&lt;a href=&#34;https://www.austintexas.org/listings/barton-springs-pool/4687/&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;Barton Springs Pool&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;, I learned the basics of performing machine learning analyses in &lt;/span&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=9kYUGMg_14s&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;R&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;, a programming language centered around statistical analysis. Going in, I had a strong background in R, but I did not have a working knowledge of machine learning. The workshop’s &lt;/span&gt;&lt;a href=&#34;https://github.com/topepo/rstudio-conf-2019&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;exercises&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; and &lt;/span&gt;&lt;a href=&#34;https://resources.rstudio.com/authors/max-kuhn&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;strong leadership&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; gave me more confidence in using the machine learning techniques I was already familiar with and introduced me to algorithms I had never heard of. It was one of these new algorithms– I point out it’s named &lt;/span&gt;&lt;a href=&#34;https://bradleyboehmke.github.io/HOML/mars.html&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;MARS&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; for the statistically and astronomically inclined– that I decided to use for my dissertation chapter. It strikes a balance between predictive power and explanatory ease that I am aiming for in my project. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;After some months of pulling my hair out, working through the kinks of how to wrangle 4.7 million insect DNA sequences, I was able to use my new machine learning skills to perform preliminary analyses of my data. The results, which I presented as a &lt;/span&gt;&lt;a href=&#34;https://www.dropbox.com/s/8nhvskh6xarg6ej/poster_ConnorFrench.pdf?dl=0&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;poster&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; at the &lt;/span&gt;&lt;a href=&#34;https://www.evolutionmeetings.org/evolution-2019---providence.html&#34;&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt;Evolution&lt;/span&gt;&lt;/a&gt;&lt;span style=&#34;font-weight: 400;&#34;&gt; conference in Providence, Rhode Island, point toward my metric being a useful summary of insect biodiversity. I received numerous bits of positive feedback that I am currently using to finalize my analyses and publish this work in a professional journal. Initially, I thought this project would take up a large chunk of my PhD, but with the help of the Applied Machine Workshop and GC Digital Initiatives, I was able to jumpstart my analyses and will put out a stronger product, sooner. In due course, I hope my research leads to a stronger understanding of insect diversity and how us humans are impacting it.&lt;/span&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Polyploid evolution</title>
+      <link>/project/polyploid-evolution/</link>
+      <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/project/polyploid-evolution/</guid>
+      <description>
+
+
+&lt;p&gt;Whole genome duplications (WGD) have contributed significantly to the diversification of major plant and animal lineages. How WGD occurs can have a profound influence on the resulting lineage’s evolutionary history. Generalizations about how WGD formation influences evolutionary processes in lineages that have retained their duplicated genome, i.e. polyploid species, are limited by the field’s focus on a few target systems. The accelerating discovery of polyploidy in lineages previously thought to harbor few polyploid species prompts the investigation of how these lineages arose and how WGD has influenced their subsequent evolution. That is why I am investigating the origins and evolutionary response of WGD in a tetraploid-diploid species pair of frogs from the Brazilian Atlantic Forest.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The tadpole of Ameerega boehmei in southeastern Bolivia</title>
+      <link>/publication/zootaxa_2019_boehmei-description/</link>
+      <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/zootaxa_2019_boehmei-description/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Speciation with introgression: Phylogeography and systematics of the Ameerega petersi group (Dendrobatidae)</title>
+      <link>/publication/mpe_2019_speciation-with-introgression/</link>
+      <pubDate>Tue, 21 May 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/mpe_2019_speciation-with-introgression/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Slides</title>
+      <link>/slides/example/</link>
+      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>/slides/example/</guid>
+      <description>
+
+&lt;h1 id=&#34;welcome-to-slides&#34;&gt;Welcome to Slides&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/&#34; target=&#34;_blank&#34;&gt;Academic&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Efficiently write slides in Markdown&lt;/li&gt;
+&lt;li&gt;3-in-1: Create, Present, and Publish your slides&lt;/li&gt;
+&lt;li&gt;Supports speaker notes&lt;/li&gt;
+&lt;li&gt;Mobile friendly slides&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;controls&#34;&gt;Controls&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Next: &lt;code&gt;Right Arrow&lt;/code&gt; or &lt;code&gt;Space&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Previous: &lt;code&gt;Left Arrow&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Start: &lt;code&gt;Home&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Finish: &lt;code&gt;End&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Overview: &lt;code&gt;Esc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Speaker notes: &lt;code&gt;S&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Fullscreen: &lt;code&gt;F&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Zoom: &lt;code&gt;Alt + Click&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/hakimel/reveal.js#pdf-export&#34; target=&#34;_blank&#34;&gt;PDF Export&lt;/a&gt;: &lt;code&gt;E&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;code-highlighting&#34;&gt;Code Highlighting&lt;/h2&gt;
+
+&lt;p&gt;Inline code: &lt;code&gt;variable&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Code block:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;porridge = &amp;quot;blueberry&amp;quot;
+if porridge == &amp;quot;blueberry&amp;quot;:
+    print(&amp;quot;Eating...&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;math&#34;&gt;Math&lt;/h2&gt;
+
+&lt;p&gt;In-line math: $x + y = z$&lt;/p&gt;
+
+&lt;p&gt;Block math:&lt;/p&gt;
+
+&lt;p&gt;$$
+f\left( x \right) = \;\frac{{2\left( {x + 4} \right)\left( {x - 4} \right)}}{{\left( {x + 4} \right)\left( {x + 1} \right)}}
+$$&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;fragments&#34;&gt;Fragments&lt;/h2&gt;
+
+&lt;p&gt;Make content appear incrementally&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{{% fragment %}} One {{% /fragment %}}
+{{% fragment %}} **Two** {{% /fragment %}}
+{{% fragment %}} Three {{% /fragment %}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Press &lt;code&gt;Space&lt;/code&gt; to play!&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&#34;fragment &#34; &gt;
+   One
+&lt;/span&gt;
+&lt;span class=&#34;fragment &#34; &gt;
+   &lt;strong&gt;Two&lt;/strong&gt;
+&lt;/span&gt;
+&lt;span class=&#34;fragment &#34; &gt;
+   Three
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;A fragment can accept two optional parameters:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;class&lt;/code&gt;: use a custom style (requires definition in custom CSS)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;weight&lt;/code&gt;: sets the order in which a fragment appears&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;speaker-notes&#34;&gt;Speaker Notes&lt;/h2&gt;
+
+&lt;p&gt;Add speaker notes to your presentation&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{% speaker_note %}}
+- Only the speaker can read these notes
+- Press `S` key to view
+{{% /speaker_note %}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Press the &lt;code&gt;S&lt;/code&gt; key to view the speaker notes!&lt;/p&gt;
+
+&lt;aside class=&#34;notes&#34;&gt;
+  &lt;ul&gt;
+&lt;li&gt;Only the speaker can read these notes&lt;/li&gt;
+&lt;li&gt;Press &lt;code&gt;S&lt;/code&gt; key to view&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/aside&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;black: Black background, white text, blue links (default)&lt;/li&gt;
+&lt;li&gt;white: White background, black text, blue links&lt;/li&gt;
+&lt;li&gt;league: Gray background, white text, blue links&lt;/li&gt;
+&lt;li&gt;beige: Beige background, dark text, brown links&lt;/li&gt;
+&lt;li&gt;sky: Blue background, thin dark text, blue links&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;night: Black background, thick white text, orange links&lt;/li&gt;
+&lt;li&gt;serif: Cappuccino background, gray text, brown links&lt;/li&gt;
+&lt;li&gt;simple: White background, black text, blue links&lt;/li&gt;
+&lt;li&gt;solarized: Cream-colored background, dark green text, blue links&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+
+&lt;section data-noprocess data-shortcode-slide
+  
+      
+      data-background-image=&#34;/img/boards.jpg&#34;
+  &gt;
+
+
+&lt;h2 id=&#34;custom-slide&#34;&gt;Custom Slide&lt;/h2&gt;
+
+&lt;p&gt;Customize the slide style and background&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{&amp;lt; slide background-image=&amp;quot;/img/boards.jpg&amp;quot; &amp;gt;}}
+{{&amp;lt; slide background-color=&amp;quot;#0000FF&amp;quot; &amp;gt;}}
+{{&amp;lt; slide class=&amp;quot;my-style&amp;quot; &amp;gt;}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;custom-css-example&#34;&gt;Custom CSS Example&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s make headers navy colored.&lt;/p&gt;
+
+&lt;p&gt;Create &lt;code&gt;assets/css/reveal_custom.css&lt;/code&gt; with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;.reveal section h1,
+.reveal section h2,
+.reveal section h3 {
+  color: navy;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;questions&#34;&gt;Questions?&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://discourse.gohugo.io&#34; target=&#34;_blank&#34;&gt;Ask&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Privacy Policy</title>
+      <link>/privacy/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
+      <guid>/privacy/</guid>
+      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Terms</title>
+      <link>/terms/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
+      <guid>/terms/</guid>
+      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>External Project</title>
+      <link>/project_examples/external-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>/project_examples/external-project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Internal Project</title>
+      <link>/project_examples/internal-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>/project_examples/internal-project/</guid>
+      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

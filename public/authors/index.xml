@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | Connor M. French</title>
+    <link>/authors/</link>
+      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 05 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Authors</title>
+      <link>/authors/</link>
+    </image>
+    
+    <item>
+      <title>Connor French</title>
+      <link>/authors/connor-french/</link>
+      <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/connor-french/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/authors/admin/</link>
+      <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/admin/</guid>
+      <description>&lt;p&gt;I am a PhD student in the &lt;a href=&#34;https://hickerlab.wordpress.com/&#34; target=&#34;_blank&#34;&gt;Mike Hickerson&lt;/a&gt; and &lt;a href=&#34;https://carnavallab.org&#34; target=&#34;_blank&#34;&gt;Ana Carnaval&lt;/a&gt; labs at the City University of New York, City College campus, supported as a &lt;a href=&#34;https://digitalfellows.commons.gc.cuny.edu/&#34; target=&#34;_blank&#34;&gt;Graduate Center Digital Fellow&lt;/a&gt;. I&amp;rsquo;m working to understand population genetic patterns and processes at different spatial scales.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Carmen Burkette</title>
+      <link>/authors/carmen-burkette/</link>
+      <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/carmen-burkette/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jason L. Brown</title>
+      <link>/authors/jason-l.-brown/</link>
+      <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/jason-l.-brown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Steffen Reichle</title>
+      <link>/authors/steffen-reichle/</link>
+      <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/steffen-reichle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Carlos E. Almora</title>
+      <link>/authors/carlos-e.-almora/</link>
+      <pubDate>Tue, 21 May 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/carlos-e.-almora/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Germán Chávez</title>
+      <link>/authors/german-chavez/</link>
+      <pubDate>Tue, 21 May 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/german-chavez/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Michael S. Deutsch</title>
+      <link>/authors/michael-s.-deutsch/</link>
+      <pubDate>Tue, 21 May 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/michael-s.-deutsch/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

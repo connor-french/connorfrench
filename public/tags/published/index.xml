@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Published | Connor M. French</title>
+    <link>/tags/published/</link>
+      <atom:link href="/tags/published/index.xml" rel="self" type="application/rss+xml" />
+    <description>Published</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 27 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Published</title>
+      <link>/tags/published/</link>
+    </image>
+    
+    <item>
+      <title>The tadpole of Ameerega boehmei in southeastern Bolivia</title>
+      <link>/publication/zootaxa_2019_boehmei-description/</link>
+      <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/zootaxa_2019_boehmei-description/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Speciation with introgression: Phylogeography and systematics of the Ameerega petersi group (Dendrobatidae)</title>
+      <link>/publication/mpe_2019_speciation-with-introgression/</link>
+      <pubDate>Tue, 21 May 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/mpe_2019_speciation-with-introgression/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
