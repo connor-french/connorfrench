@@ -1,7 +1,6 @@
 [build]
   command = "hugo --gc --minify -b $URL --themesDir ../../"
-  base    = "connorfrench"
-  publish = "connorfrench/public"
+  publish = "public"
 
 [build.environment]
   HUGO_THEME = "repo"
@@ -9,6 +8,7 @@
   HUGO_ENABLEGITINFO = "true"
 
 [context.production.environment]
+  HUGO_VERSION = "0.58.3"
   HUGO_ENV = "production"
 
 [context.deploy-preview]
