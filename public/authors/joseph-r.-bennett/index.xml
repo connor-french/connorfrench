@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Joseph R. Bennett | Connor M. French</title>
+    <link>/authors/joseph-r.-bennett/</link>
+      <atom:link href="/authors/joseph-r.-bennett/index.xml" rel="self" type="application/rss+xml" />
+    <description>Joseph R. Bennett</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 05 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Joseph R. Bennett</title>
+      <link>/authors/joseph-r.-bennett/</link>
+    </image>
+    
+    <item>
+      <title>SDMtoolbox 2.0: the next generation Python-based GIS toolkit for landscape genetic, biogeographic and species distribution model analyses</title>
+      <link>/publication/peerj_2017_sdmtoolbox/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      <guid>/publication/peerj_2017_sdmtoolbox/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

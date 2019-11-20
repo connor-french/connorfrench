@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Global | Connor M. French</title>
+    <link>/tags/global/</link>
+      <atom:link href="/tags/global/index.xml" rel="self" type="application/rss+xml" />
+    <description>Global</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 27 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Global</title>
+      <link>/tags/global/</link>
+    </image>
+    
+    <item>
+      <title>Population genetics on a global scale</title>
+      <link>/project/global-popgen/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/project/global-popgen/</guid>
+      <description>
+
+
+&lt;p&gt;The rapid accumulation of publicly available biodiversity data has been a catalyst for cross-scale research.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -14,11 +14,11 @@ image:
   focal_point: ""
   preview_only: false
 projects: []
-publication: '*Molecular Phylogenetics and Evolution*(138, 31-42)'
+publication: '*Molecular Phylogenetics and Evolution* (138, 31-42)'
 publication_short: ""
 publication_types:
   - "2"
-publishDate: 2019-10-06T00:00:00
+publishDate: 2019-05-21T00:00:00
 slides: ""
 summary: ""
 tags:

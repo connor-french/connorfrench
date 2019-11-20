@@ -5,7 +5,7 @@ authors:
 - Carmen Burkette
 - Steffen Reichle
 - Jason L. Brown
-date: '2019-08-27'
+date: 2019-08-27
 doi: "http://dx.doi.org/10.11646/zootaxa.4661.1.12"
 featured: false
 image:
@@ -13,11 +13,11 @@ image:
   focal_point: ""
   preview_only: false
 projects: []
-publication: '*Zootaxa*(4661, 1)'
+publication: '*Zootaxa* (4661, 1)'
 publication_short: ""
 publication_types:
 - "2"
-publishDate: '2019-10-06'
+publishDate: 2019-08-27
 slides: ""
 summary: ""
 tags:

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Daniel I. Bolnick | Connor M. French</title>
+    <link>/authors/daniel-i.-bolnick/</link>
+      <atom:link href="/authors/daniel-i.-bolnick/index.xml" rel="self" type="application/rss+xml" />
+    <description>Daniel I. Bolnick</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Daniel I. Bolnick</title>
+      <link>/authors/daniel-i.-bolnick/</link>
+    </image>
+    
+    <item>
+      <title>Geographical variation in colour of female threespine stickleback (Gasterosteus aculeatus)</title>
+      <link>/publication/peerj_2018_stickleback/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/publication/peerj_2018_stickleback/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

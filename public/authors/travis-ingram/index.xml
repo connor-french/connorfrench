@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Travis Ingram | Connor M. French</title>
+    <link>/authors/travis-ingram/</link>
+      <atom:link href="/authors/travis-ingram/index.xml" rel="self" type="application/rss+xml" />
+    <description>Travis Ingram</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Travis Ingram</title>
+      <link>/authors/travis-ingram/</link>
+    </image>
+    
+    <item>
+      <title>Geographical variation in colour of female threespine stickleback (Gasterosteus aculeatus)</title>
+      <link>/publication/peerj_2018_stickleback/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/publication/peerj_2018_stickleback/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

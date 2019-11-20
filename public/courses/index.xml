@@ -12,5 +12,831 @@
       <link>/courses/</link>
     </image>
     
+    <item>
+      <title></title>
+      <link>/courses/r_trial/02-isolating/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/courses/r_trial/02-isolating/</guid>
+      <description>&lt;!DOCTYPE html&gt;
+
+&lt;html xmlns=&#34;http://www.w3.org/1999/xhtml&#34;&gt;
+
+&lt;head&gt;
+
+&lt;meta charset=&#34;utf-8&#34;&gt;
+&lt;meta http-equiv=&#34;Content-Type&#34; content=&#34;text/html; charset=utf-8&#34; /&gt;
+&lt;meta name=&#34;generator&#34; content=&#34;pandoc&#34; /&gt;
+
+
+
+&lt;meta name=&#34;progressive&#34; content=&#34;true&#34; /&gt;
+&lt;meta name=&#34;allow-skip&#34; content=&#34;true&#34; /&gt;
+
+&lt;title&gt;Isolating Data with dplyr&lt;/title&gt;
+
+
+&lt;!-- highlightjs --&gt;
+&lt;style type=&#34;text/css&#34;&gt;code{white-space: pre;}&lt;/style&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+  pre:not([class]) {
+    background-color: white;
+  }
+&lt;/style&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;
+if (window.hljs &amp;&amp; document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+&lt;/script&gt;
+
+
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+
+
+&lt;div class=&#34;pageContent band&#34;&gt;
+&lt;div class=&#34;bandContent page&#34;&gt;
+
+&lt;div class=&#34;topics&#34;&gt;
+
+&lt;div id=&#34;section-welcome&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Welcome&lt;/h2&gt;
+&lt;p&gt;In this case study, you will explore the popularity of your own name over time. Along the way, you will master some of the most useful functions for isolating variables, cases, and values within a data frame:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;select()&lt;/code&gt; and &lt;code&gt;filter()&lt;/code&gt;, which let you extract rows and columns from a data frame&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;arrange()&lt;/code&gt;, which lets you reorder the rows in your data&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%&amp;gt;%&lt;/code&gt;, which organizes your code into reader-friendly “pipes”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This tutorial uses the &lt;a href=&#34;http://tidyverse.org/&#34;&gt;core tidyverse packages&lt;/a&gt;, including ggplot2, tibble, and dplyr, as well as the &lt;code&gt;babynames&lt;/code&gt; package. All of these packages have been pre-installed and pre-loaded for your convenience.&lt;/p&gt;
+&lt;p&gt;Click the Next Topic button to begin.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-your-name&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Your name&lt;/h2&gt;
+&lt;div id=&#34;section-the-history-of-your-name&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;The history of your name&lt;/h3&gt;
+&lt;p&gt;You can use the data in &lt;code&gt;babynames&lt;/code&gt; to make graphs like this, which reveal the history of a name, perhaps your name.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;02-isolating_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;90%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;But before you do, you will need to trim down &lt;code&gt;babynames&lt;/code&gt;. At the moment, there are more rows in &lt;code&gt;babynames&lt;/code&gt; than you need to build your plot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-an-example&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;An example&lt;/h3&gt;
+&lt;p&gt;To see what I mean, consider how I made the plot above: I began with the entire data set, which if plotted as a scatterplot would’ve looked like this.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;02-isolating_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;60%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I then narrowed the data to just the rows that contain my name, before plotting the data with a line geom. Here’s how the rows with just my name look as a scatterplot.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;02-isolating_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;60%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;If I had skipped this step, my line graph would’ve connected all of the points in the large data set, creating an uninformative graph.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;02-isolating_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;60%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Your goal in this section is to repeat this process for your own name (or a name that you choose). Along the way, you will learn a set of functions that isolate information within a data set.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-isolating-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Isolating data&lt;/h3&gt;
+&lt;p&gt;This type of task occurs often in Data Science: you need to extract data from a table before you can use it. You can do this task quickly with three functions that come in the dplyr package:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;strong&gt;select()&lt;/strong&gt; - which extracts columns from a data frame&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;filter()&lt;/strong&gt; - which extracts rows from a data frame&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;arrange()&lt;/strong&gt; - which moves important rows to the top of a data frame&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Each function takes a data frame or tibble as it’s first argument and returns a new data frame or tibble as its output.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-select&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;select()&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;select()&lt;/code&gt; extracts columns of a data frame and returns the columns as a new data frame. To use &lt;code&gt;select()&lt;/code&gt;, pass it the name of a data frame to extract columns from, and then the names of the columns to extract. The column names do not need to appear in quotation marks or be prefixed with a &lt;code&gt;$&lt;/code&gt;; &lt;code&gt;select()&lt;/code&gt; knows to find them in the data frame that you supply.&lt;/p&gt;
+&lt;div id=&#34;section-exercise---select&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Exercise - select()&lt;/h3&gt;
+&lt;p&gt;Use the example below to get a feel for &lt;code&gt;select()&lt;/code&gt;. Can you extract just the &lt;code&gt;name&lt;/code&gt; column? How about the &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;year&lt;/code&gt; columns? How about all of the columns except &lt;code&gt;prop&lt;/code&gt;?&lt;/p&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;select-1&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;select(babynames, name, sex)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 1,924,665 x 2
+   name      sex  
+   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;
+ 1 Mary      F    
+ 2 Anna      F    
+ 3 Emma      F    
+ 4 Elizabeth F    
+ 5 Minnie    F    
+ 6 Margaret  F    
+ 7 Ida       F    
+ 8 Alice     F    
+ 9 Bertha    F    
+10 Sarah     F    
+# … with 1,924,655 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.setup&#34;:&#34;bnames&#34;,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;select-1-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;select(babynames, name)
+select(babynames, name, year)
+select(babynames, year, sex, name, n)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-select-helpers&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;select() helpers&lt;/h3&gt;
+&lt;p&gt;You can also use a series of helpers with &lt;code&gt;select()&lt;/code&gt;. For example, if you place a minus sign before a column name, &lt;code&gt;select()&lt;/code&gt; will return every column but that column. Can you predict how the minus sign will work here?&lt;/p&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;select-2&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;select(babynames, -c(n, prop))&lt;/code&gt;&lt;/pre&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.setup&#34;:&#34;bnames&#34;,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;p&gt;The table below summarizes the other &lt;code&gt;select()&lt;/code&gt; helpers that are available in dplyr. Study it, and then click “Continue” to test your understanding.&lt;/p&gt;
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;23%&#34; /&gt;
+&lt;col width=&#34;67%&#34; /&gt;
+&lt;col width=&#34;9%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;Helper Function&lt;/th&gt;
+&lt;th&gt;Use&lt;/th&gt;
+&lt;th&gt;Example&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;strong&gt;-&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Columns except&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;select(babynames, -prop)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;strong&gt;:&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Columns between (inclusive)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;select(babynames, year:n)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;strong&gt;contains()&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Columns that contains a string&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;select(babynames, contains(&#34;n&#34;))&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;strong&gt;ends_with()&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Columns that ends with a string&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;select(babynames, ends_with(&#34;n&#34;))&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;strong&gt;matches()&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Columns that matches a regex&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;select(babynames, matches(&#34;n&#34;))&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;strong&gt;num_range()&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Columns with a numerical suffix in the range&lt;/td&gt;
+&lt;td&gt;Not applicable with &lt;code&gt;babynames&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;strong&gt;one_of()&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Columns whose name appear in the given set&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;select(babynames, one_of(c(&#34;sex&#34;, &#34;gender&#34;))&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;strong&gt;starts_with()&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Columns that starts with a string&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;select(babynames, starts_with(&#34;n&#34;))&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-select-quiz&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;select() quiz&lt;/h3&gt;
+
+&lt;div id=&#34;htmlwidget-d25f199584ef16e68fea&#34; style=&#34;width:100%;height:auto;&#34;, class = &#34;quiz html-widget&#34;&gt;
+&lt;div class=&#34;panel panel-default&#34;&gt;
+&lt;div class=&#34;panel-body quizArea&#34;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-d25f199584ef16e68fea&#34;&gt;{&#34;x&#34;:{&#34;question&#34;:&#34;Which of these is not a way to select the &lt;code&gt;name&lt;\/code&gt; and &lt;code&gt;n&lt;\/code&gt; columns together?&#34;,&#34;answers&#34;:[{&#34;option&#34;:&#34;select(babynames, -c(year, sex, prop))&#34;,&#34;correct&#34;:false,&#34;message&#34;:null},{&#34;option&#34;:&#34;select(babynames, name:n)&#34;,&#34;correct&#34;:false,&#34;message&#34;:null},{&#34;option&#34;:&#34;select(babynames, starts_with(&amp;quot;n&amp;quot;))&#34;,&#34;correct&#34;:false,&#34;message&#34;:null},{&#34;option&#34;:&#34;select(babynames, ends_with(&amp;quot;n&amp;quot;))&#34;,&#34;correct&#34;:true,&#34;message&#34;:null}],&#34;label&#34;:&#34;select-quiz&#34;,&#34;skipStartButton&#34;:true,&#34;perQuestionResponseAnswers&#34;:true,&#34;perQuestionResponseMessaging&#34;:true,&#34;preventUnanswered&#34;:true,&#34;displayQuestionCount&#34;:false,&#34;displayQuestionNumber&#34;:false,&#34;disableRanking&#34;:true,&#34;nextQuestionText&#34;:&#34;&#34;,&#34;checkAnswerText&#34;:&#34;Submit Answer&#34;,&#34;allowRetry&#34;:true,&#34;randomSortAnswers&#34;:false,&#34;json&#34;:{&#34;info&#34;:{&#34;name&#34;:&#34;&#34;,&#34;main&#34;:&#34;&#34;},&#34;questions&#34;:[{&#34;q&#34;:&#34;Which of these is not a way to select the &lt;code&gt;name&lt;\/code&gt; and &lt;code&gt;n&lt;\/code&gt; columns together?&#34;,&#34;a&#34;:[{&#34;option&#34;:&#34;select(babynames, -c(year, sex, prop))&#34;,&#34;correct&#34;:false,&#34;message&#34;:null},{&#34;option&#34;:&#34;select(babynames, name:n)&#34;,&#34;correct&#34;:false,&#34;message&#34;:null},{&#34;option&#34;:&#34;select(babynames, starts_with(&amp;quot;n&amp;quot;))&#34;,&#34;correct&#34;:false,&#34;message&#34;:null},{&#34;option&#34;:&#34;select(babynames, ends_with(&amp;quot;n&amp;quot;))&#34;,&#34;correct&#34;:true,&#34;message&#34;:null}],&#34;correct&#34;:&#34;Correct!&#34;,&#34;incorrect&#34;:&#34;Incorrect.&#34;}]}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-filter&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;filter()&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;filter()&lt;/code&gt; extracts rows from a data frame and returns them as a new data frame. As with &lt;code&gt;select()&lt;/code&gt;, the first argument of &lt;code&gt;filter()&lt;/code&gt; should be a data frame to extract rows from. The arguments that follow should be logical tests; &lt;code&gt;filter()&lt;/code&gt; will return every row for which the tests return &lt;code&gt;TRUE&lt;/code&gt;.&lt;/p&gt;
+&lt;div id=&#34;section-filter-in-action&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;filter in action&lt;/h3&gt;
+&lt;p&gt;For example, the code chunk below returns every row with the name “Sea” in &lt;code&gt;babynames&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(babynames, name == &amp;quot;Sea&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 5
+##    year sex   name      n       prop
+##   &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;      &amp;lt;dbl&amp;gt;
+## 1  1982 F     Sea       5 0.00000276
+## 2  1985 M     Sea       6 0.00000312
+## 3  1986 M     Sea       5 0.0000026 
+## 4  1998 F     Sea       5 0.00000258&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-logical-tests&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Logical tests&lt;/h3&gt;
+&lt;p&gt;To get the most from filter, you will need to know how to use R’s logical test operators, which are summarised below.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;Logical operator&lt;/th&gt;
+&lt;th&gt;tests&lt;/th&gt;
+&lt;th&gt;Example&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;strong&gt;&amp;gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Is &lt;code&gt;x&lt;/code&gt; greater than &lt;code&gt;y&lt;/code&gt;?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;x &amp;gt; y&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;strong&gt;&amp;gt;=&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Is &lt;code&gt;x&lt;/code&gt; greater than or equal to &lt;code&gt;y&lt;/code&gt;?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;x &amp;gt;= y&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;strong&gt;&amp;lt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Is &lt;code&gt;x&lt;/code&gt; less than &lt;code&gt;y&lt;/code&gt;?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;x &amp;lt; y&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;strong&gt;&amp;lt;=&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Is &lt;code&gt;x&lt;/code&gt; less than or equal to &lt;code&gt;y&lt;/code&gt;?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;x &amp;lt;= y&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;strong&gt;==&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Is &lt;code&gt;x&lt;/code&gt; equal to &lt;code&gt;y&lt;/code&gt;?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;x == y&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;strong&gt;!=&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Is &lt;code&gt;x&lt;/code&gt; not equal to &lt;code&gt;y&lt;/code&gt;?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;x != y&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;strong&gt;is.na()&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Is &lt;code&gt;x&lt;/code&gt; an &lt;code&gt;NA&lt;/code&gt;?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;is.na(x)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;strong&gt;!is.na()&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Is &lt;code&gt;x&lt;/code&gt; not an &lt;code&gt;NA&lt;/code&gt;?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;!is.na(x)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-exercise---logical-operators&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Exercise - Logical Operators&lt;/h3&gt;
+&lt;p&gt;See if you can use the logical operators to manipulate our code below to show:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;All of the names where prop is greater than or equal to 0.08&lt;/li&gt;
+&lt;li&gt;All of the children named “Khaleesi”&lt;/li&gt;
+&lt;li&gt;All of the names that have a missing value for &lt;code&gt;n&lt;/code&gt; (Hint: this should return an empty data set).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;filter-0&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;filter(babynames, name == &amp;quot;Sea&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.setup&#34;:&#34;bnames&#34;,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;filter-0-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;filter(babynames, prop &amp;gt;= 0.08)
+filter(babynames, name == &amp;quot;Khaleesi&amp;quot;)
+filter(babynames, is.na(n))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-two-common-mistakes&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Two common mistakes&lt;/h3&gt;
+&lt;p&gt;When you use logical tests, be sure to look out for two common mistakes. One appears in each code chunk below. Can you find them? When you spot a mistake, fix it and then run the chunk to confirm that it works.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(babynames, name = &amp;quot;Sea&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;filter-1a&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.setup&#34;:&#34;bnames&#34;,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;filter-1a-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;filter(babynames, name == &amp;quot;Sea&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;filter-1a-check&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;&amp;quot;Good Job! Remember to use == instead of = when testing for equality.&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(babynames, name == Sea)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;filter-1b&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.setup&#34;:&#34;bnames&#34;,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;filter-1b-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;filter(babynames, name == &amp;quot;Sea&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;filter-1b-check&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;&amp;quot;Good Job! As written this code would check that name is equal to the contents of the object named Sea, which does not exist.&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-two-mistakes---recap&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Two mistakes - Recap&lt;/h3&gt;
+&lt;p&gt;When you use logical tests, be sure to look out for these two common mistakes:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;using &lt;code&gt;=&lt;/code&gt; instead of &lt;code&gt;==&lt;/code&gt; to test for equality.&lt;/li&gt;
+&lt;li&gt;forgetting to use quotation marks when comparing strings, e.g. &lt;code&gt;name == Abby&lt;/code&gt;, instead of &lt;code&gt;name == &#34;Abby&#34;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-combining-tests&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Combining tests&lt;/h3&gt;
+&lt;p&gt;If you provide more than one test to &lt;code&gt;filter()&lt;/code&gt;, &lt;code&gt;filter()&lt;/code&gt; will combine the tests with an &lt;strong&gt;and&lt;/strong&gt; statement (&lt;code&gt;&amp;amp;&lt;/code&gt;): it will only return the rows that satisfy all of the tests.&lt;/p&gt;
+&lt;p&gt;To combine multiple tests in a different way, use R’s Boolean operators. For example, the code below will return all of the children named Sea or Anemone.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(babynames, name == &amp;quot;Sea&amp;quot; | name == &amp;quot;Anemone&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 5
+##    year sex   name        n       prop
+##   &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;   &amp;lt;int&amp;gt;      &amp;lt;dbl&amp;gt;
+## 1  1982 F     Sea         5 0.00000276
+## 2  1985 M     Sea         6 0.00000312
+## 3  1986 M     Sea         5 0.0000026 
+## 4  1998 F     Sea         5 0.00000258
+## 5  2012 F     Anemone     6 0.0000031&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-boolean-operators&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Boolean operators&lt;/h3&gt;
+&lt;p&gt;You can find a complete list or base R’s boolean operators in the table below.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;Boolean operator&lt;/th&gt;
+&lt;th&gt;represents&lt;/th&gt;
+&lt;th&gt;Example&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;strong&gt;&amp;amp;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Are &lt;em&gt;both&lt;/em&gt; &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;B&lt;/code&gt; true?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;A &amp;amp; B&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;code&gt;|&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Are &lt;em&gt;one or both&lt;/em&gt; of &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;B&lt;/code&gt; true?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;A | B&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;strong&gt;!&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Is &lt;code&gt;A&lt;/code&gt; &lt;em&gt;not&lt;/em&gt; true?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;!A&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;strong&gt;xor()&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Is &lt;em&gt;one and only one&lt;/em&gt; of &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;B&lt;/code&gt; true?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;xor(A, B)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;strong&gt;%in%&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Is &lt;code&gt;x&lt;/code&gt; in the set of &lt;code&gt;a&lt;/code&gt;, &lt;code&gt;b&lt;/code&gt;, and &lt;code&gt;c&lt;/code&gt;?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;x %in% c(a, b, c)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;strong&gt;any()&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Are &lt;em&gt;any&lt;/em&gt; of &lt;code&gt;A&lt;/code&gt;, &lt;code&gt;B&lt;/code&gt;, or &lt;code&gt;C&lt;/code&gt; true?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;any(A, B, C)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;strong&gt;all()&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Are &lt;em&gt;all&lt;/em&gt; of &lt;code&gt;A&lt;/code&gt;, &lt;code&gt;B&lt;/code&gt;, or &lt;code&gt;C&lt;/code&gt; true?&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;all(A, B, C)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-exercise---combining-tests&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Exercise - Combining tests&lt;/h3&gt;
+&lt;p&gt;Use Boolean operators to alter the code chunk below to return only the rows that contain:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Girls&lt;/em&gt; named Sea&lt;/li&gt;
+&lt;li&gt;Names that were used by exactly 5 or 6 children in 1880&lt;/li&gt;
+&lt;li&gt;Names that are one of Acura, Lexus, or Yugo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;filter-2&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;filter(babynames, name == &amp;quot;Sea&amp;quot; | name == &amp;quot;Anemone&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 5 x 5
+   year sex   name        n       prop
+  &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;   &amp;lt;int&amp;gt;      &amp;lt;dbl&amp;gt;
+1  1982 F     Sea         5 0.00000276
+2  1985 M     Sea         6 0.00000312
+3  1986 M     Sea         5 0.0000026 
+4  1998 F     Sea         5 0.00000258
+5  2012 F     Anemone     6 0.0000031 &lt;/code&gt;&lt;/pre&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.setup&#34;:&#34;bnames&#34;,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;filter-2-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;filter(babynames, name == &amp;quot;Sea&amp;quot;, sex == &amp;quot;F&amp;quot;)
+filter(babynames, n == 5 | n == 6, year == 1880)
+filter(babynames, name %in% c(&amp;quot;Acura&amp;quot;, &amp;quot;Lexus&amp;quot;, &amp;quot;Yugo&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-two-more-common-mistakes&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Two more common mistakes&lt;/h3&gt;
+&lt;p&gt;Logical tests also invite two common mistakes that you should look out for. Each is displayed in a code chunk below, one produces an error and the other is needlessly verbose. Diagnose the chunks and then fix the code.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(babynames, 10 &amp;lt; n &amp;lt; 20)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;filter-3&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.setup&#34;:&#34;bnames&#34;,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;filter-3-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;filter(babynames, 10 &amp;lt; n, n &amp;lt; 20)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;filter-3-check&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;&amp;quot;Good job! You cannot combine two logical tests in R without using a Boolean operator (or at least a comma between filter arguments).&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(babynames, n == 5 | n == 6 | n == 7 | n == 8 | n == 9)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;filter-4&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.setup&#34;:&#34;bnames&#34;,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;filter-4-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;filter(babynames, n %in% c(5, 6, 7, 8, 9))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;filter-4-check&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;&amp;quot;Good job! Although the first code works, you should make your code more concise by collapsing multiple or statements into an %in% statement when possible.&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-two-more-common-mistakes---recap&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Two more common mistakes - Recap&lt;/h3&gt;
+&lt;p&gt;When you combine multiple logical tests, be sure to look out for these two common mistakes:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Collapsing multiple logical tests into a single test &lt;em&gt;without using a boolean operator&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Using repeated &lt;code&gt;|&lt;/code&gt; instead of &lt;code&gt;%in%&lt;/code&gt;, e.g. &lt;code&gt;x == 1 | x == 2 | x == 3&lt;/code&gt; instead of &lt;code&gt;x %in% c(1, 2, 3)&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-arrange&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;arrange()&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;arrange()&lt;/code&gt; returns all of the rows of a data frame reordered by the values of a column. As with &lt;code&gt;select()&lt;/code&gt;, the first argument of &lt;code&gt;arrange()&lt;/code&gt; should be a data frame and the remaining arguments should be the names of columns. If you give &lt;code&gt;arrange()&lt;/code&gt; a single column name, it will return the rows of the data frame reordered so that the row with the lowest value in that column appears first, the row with the second lowest value appears second, and so on. If the column contains character strings, &lt;code&gt;arrange()&lt;/code&gt; will place them in alphabetical order.&lt;/p&gt;
+&lt;div id=&#34;section-exercise---arrange&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Exercise - arrange()&lt;/h3&gt;
+&lt;p&gt;Use the code chunk below to arrange babynames by &lt;code&gt;n&lt;/code&gt;. Can you tell what the smallest value of &lt;code&gt;n&lt;/code&gt; is?&lt;/p&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;arrange-1&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.setup&#34;:&#34;bnames&#34;,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;arrange-1-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;arrange(babynames, n)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;arrange-1-check&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;&amp;quot;Good job! The compiler of `babynames` used 5 as a cutoff; a name only made it into babynames for a given year and gender if it was used for five or more children.&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-tie-breakers&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Tie breakers&lt;/h3&gt;
+&lt;p&gt;If you supply additional column names, &lt;code&gt;arrange()&lt;/code&gt; will use them as tie breakers to order rows that have identical values in the earlier columns. Add to the code below, to make &lt;code&gt;prop&lt;/code&gt; a tie breaker. The result should first order rows by value of &lt;code&gt;n&lt;/code&gt; and then reorder rows within each value of &lt;code&gt;n&lt;/code&gt; by values of &lt;code&gt;prop&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;arrange-2&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;arrange(babynames, n)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 1,924,665 x 5
+    year sex   name          n      prop
+   &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;     &amp;lt;int&amp;gt;     &amp;lt;dbl&amp;gt;
+ 1  1880 F     Adelle        5 0.0000512
+ 2  1880 F     Adina         5 0.0000512
+ 3  1880 F     Adrienne      5 0.0000512
+ 4  1880 F     Albertine     5 0.0000512
+ 5  1880 F     Alys          5 0.0000512
+ 6  1880 F     Ana           5 0.0000512
+ 7  1880 F     Araminta      5 0.0000512
+ 8  1880 F     Arthur        5 0.0000512
+ 9  1880 F     Birtha        5 0.0000512
+10  1880 F     Bulah         5 0.0000512
+# … with 1,924,655 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;arrange-2-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;arrange(babynames, n, prop)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-desc&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;desc&lt;/h3&gt;
+&lt;p&gt;If you would rather arrange rows in the opposite order, i.e. from &lt;em&gt;large&lt;/em&gt; values to &lt;em&gt;small&lt;/em&gt; values, surround a column name with &lt;code&gt;desc()&lt;/code&gt;. &lt;code&gt;arrange()&lt;/code&gt; will reorder the rows based on the largest values to the smallest.&lt;/p&gt;
+&lt;p&gt;Add a &lt;code&gt;desc()&lt;/code&gt; to the code below to display the most popular name for 2015 (the largest year in the dataset) instead of 1880 (the smallest year in the dataset).&lt;/p&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;arrange-3&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;arrange(babynames, year, desc(prop))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 1,924,665 x 5
+    year sex   name        n   prop
+   &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;   &amp;lt;int&amp;gt;  &amp;lt;dbl&amp;gt;
+ 1  1880 M     John     9655 0.0815
+ 2  1880 M     William  9532 0.0805
+ 3  1880 F     Mary     7065 0.0724
+ 4  1880 M     James    5927 0.0501
+ 5  1880 M     Charles  5348 0.0452
+ 6  1880 M     George   5126 0.0433
+ 7  1880 M     Frank    3242 0.0274
+ 8  1880 F     Anna     2604 0.0267
+ 9  1880 M     Joseph   2632 0.0222
+10  1880 M     Thomas   2534 0.0214
+# … with 1,924,655 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;arrange-3-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;arrange(babynames, desc(year), desc(prop))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Think you have it? Click Continue to test yourself.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-arrange-quiz&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;arrange() quiz&lt;/h3&gt;
+&lt;p&gt;Which name was the most popular for a single gender in a single year? In the code chunk below, use &lt;code&gt;arrange()&lt;/code&gt; to make the row with the largest value of &lt;code&gt;prop&lt;/code&gt; appear at the top of the data set.&lt;/p&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;arrange-4&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.setup&#34;:&#34;bnames&#34;,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;arrange-4-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;arrange(babynames, desc(prop))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Now arrange &lt;code&gt;babynames&lt;/code&gt; so that the row with the largest value of &lt;code&gt;n&lt;/code&gt; appears at the top of the data frame. Will this be the same row? Why or why not?&lt;/p&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;arrange-5&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.setup&#34;:&#34;bnames&#34;,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;arrange-5-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;arrange(babynames, desc(n))
+# The number of children represented by each proportion grew 
+# over time as the population grew &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;arrange-5-check&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;&amp;quot;The number of children represented by each proportion grew over time as the population grew.&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-section&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;%&amp;gt;%&lt;/h2&gt;
+&lt;div id=&#34;section-steps&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Steps&lt;/h3&gt;
+&lt;p&gt;Notice how each dplyr function takes a data frame as input and returns a data frame as output. This makes the functions easy to use in a step by step fashion. For example, you could:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Filter babynames to just boys born in 2015&lt;/li&gt;
+&lt;li&gt;Select the &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;n&lt;/code&gt; columns from the result&lt;/li&gt;
+&lt;li&gt;Arrange those columns so that the most popular names appear near the top.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;boys_2015 &amp;lt;- filter(babynames, year == 2015, sex == &amp;quot;M&amp;quot;)
+boys_2015 &amp;lt;- select(boys_2015, name, n)
+boys_2015 &amp;lt;- arrange(boys_2015, desc(n))
+boys_2015&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 14,024 x 2
+##    name          n
+##    &amp;lt;chr&amp;gt;     &amp;lt;int&amp;gt;
+##  1 Noah      19613
+##  2 Liam      18355
+##  3 Mason     16610
+##  4 Jacob     15938
+##  5 William   15889
+##  6 Ethan     15069
+##  7 James     14799
+##  8 Alexander 14531
+##  9 Michael   14413
+## 10 Benjamin  13692
+## # … with 14,014 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-redundancy&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Redundancy&lt;/h3&gt;
+&lt;p&gt;The result shows us the most popular boys names from 2015, which is the most recent year in the data set. But take a look at the code. Do you notice how we re-create &lt;code&gt;boys_2015&lt;/code&gt; at each step so we will have something to pass to the next step? This is an inefficient way to write R code.&lt;/p&gt;
+&lt;p&gt;You could avoid creating &lt;code&gt;boys_2015&lt;/code&gt; by nesting your functions inside of each other, but this creates code that is hard to read:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;arrange(select(filter(babynames, year == 2015, sex == &amp;quot;M&amp;quot;), name, n), desc(n))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The dplyr package provides a third way to write sequences of functions: the pipe.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-section-1&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;%&amp;gt;%&lt;/h3&gt;
+&lt;p&gt;The pipe operator &lt;code&gt;%&amp;gt;%&lt;/code&gt; performs an extremely simple task: it passes the result on its left into the first argument of the function on its right. Or put another way, &lt;code&gt;x %&amp;gt;% f(y)&lt;/code&gt; is the same as &lt;code&gt;f(x, y)&lt;/code&gt;. This piece of code punctuation makes it easy to write and read series of functions that are applied in a step by step way. For example, we can use the pipe to rewrite our code above:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;babynames %&amp;gt;% 
+  filter(year == 2015, sex == &amp;quot;M&amp;quot;) %&amp;gt;% 
+  select(name, n) %&amp;gt;% 
+  arrange(desc(n))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 14,024 x 2
+##    name          n
+##    &amp;lt;chr&amp;gt;     &amp;lt;int&amp;gt;
+##  1 Noah      19613
+##  2 Liam      18355
+##  3 Mason     16610
+##  4 Jacob     15938
+##  5 William   15889
+##  6 Ethan     15069
+##  7 James     14799
+##  8 Alexander 14531
+##  9 Michael   14413
+## 10 Benjamin  13692
+## # … with 14,014 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As you read the code, pronounce &lt;code&gt;%&amp;gt;%&lt;/code&gt; as “then”. You’ll notice that dplyr makes it easy to read pipes. Each function name is a verb, so our code resembles the statement, “Take babynames, &lt;em&gt;then&lt;/em&gt; filter it by name and sex, &lt;em&gt;then&lt;/em&gt; select the name and n columns, &lt;em&gt;then&lt;/em&gt; arrange the results by descending values of n.”&lt;/p&gt;
+&lt;p&gt;dplyr also makes it easy to write pipes. Each dplyr function returns a data frame that can be piped into another dplyr function, which will accept the data frame as its first argument. In fact, dplyr functions are written with pipes in mind: each function does one simple task. dplyr expects you to use pipes to combine these simple tasks to produce sophisticated results.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-exercise---pipes&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Exercise - Pipes&lt;/h3&gt;
+&lt;p&gt;I’ll use pipes for the remainder of the tutorial, and I will expect you to as well. Let’s practice a little by writing a new pipe in the chunk below. The pipe should:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Filter babynames to just the &lt;em&gt;girls&lt;/em&gt; that were born in 2015&lt;/li&gt;
+&lt;li&gt;Select the &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;n&lt;/code&gt; columns&lt;/li&gt;
+&lt;li&gt;Arrange the results so that the most popular names are near the top.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Try to write your pipe without copying and pasting the code from above.&lt;/p&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;pipe-1&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.setup&#34;:&#34;bnames&#34;,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;pipe-1-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;babynames %&amp;gt;% 
+  filter(year == 2015, sex == &amp;quot;F&amp;quot;) %&amp;gt;% 
+  select(name, n) %&amp;gt;% 
+  arrange(desc(n))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-your-name-1&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Your name&lt;/h3&gt;
+&lt;p&gt;You’ve now mastered a set of skills that will let you easily plot the popularity of your name over time. In the code chunk below, use a combination of dplyr and ggplot2 functions with &lt;code&gt;%&amp;gt;%&lt;/code&gt; to:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Trim &lt;code&gt;babynames&lt;/code&gt; to just the rows that contain your name and your sex&lt;/li&gt;
+&lt;li&gt;Trim the result to just the columns that will appear in your graph (not strictly necessary, but useful practice)&lt;/li&gt;
+&lt;li&gt;Plot the results as a line graph with &lt;code&gt;year&lt;/code&gt; on the x axis and &lt;code&gt;prop&lt;/code&gt; on the y axis&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Note that the first argument of &lt;code&gt;ggplot()&lt;/code&gt; takes a data frame, which means you can add &lt;code&gt;ggplot()&lt;/code&gt; directly to the end of a pipe. However, you will need to switch from &lt;code&gt;%&amp;gt;%&lt;/code&gt; to &lt;code&gt;+&lt;/code&gt; to finish adding layers to your plot.&lt;/p&gt;
+&lt;div class=&#34;tutorial-exercise&#34; data-label=&#34;your-name-1&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;script type=&#34;application/json&#34; data-opts-chunk=&#34;1&#34;&gt;{&#34;fig.width&#34;:6.5,&#34;fig.height&#34;:4,&#34;fig.retina&#34;:2,&#34;fig.align&#34;:&#34;default&#34;,&#34;fig.keep&#34;:&#34;high&#34;,&#34;fig.show&#34;:&#34;asis&#34;,&#34;out.width&#34;:624,&#34;warning&#34;:true,&#34;error&#34;:false,&#34;message&#34;:true,&#34;exercise.df_print&#34;:&#34;default&#34;,&#34;exercise.timelimit&#34;:60,&#34;exercise.setup&#34;:&#34;bnames&#34;,&#34;exercise.checker&#34;:[&#34;function (label, user_code, check_code, envir_result, evaluate_result, &#34;,&#34;    ...) &#34;,&#34;{&#34;,&#34;    list(message = check_code, correct = TRUE, location = \&#34;append\&#34;)&#34;,&#34;}&#34;]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tutorial-exercise-support&#34; data-label=&#34;your-name-1-solution&#34; data-caption=&#34;Code&#34; data-completion=&#34;1&#34; data-diagnostics=&#34;1&#34; data-startover=&#34;1&#34; data-lines=&#34;0&#34;&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;babynames %&amp;gt;% 
+  filter(name == &amp;quot;Garrett&amp;quot;, sex == &amp;quot;M&amp;quot;) %&amp;gt;% 
+  select(year, prop) %&amp;gt;% 
+  ggplot() +
+    geom_line(aes(x = year, y = prop)) +
+    labs(title = &amp;quot;Popularity of the name Garrett&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-recap&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Recap&lt;/h3&gt;
+&lt;p&gt;Together, &lt;code&gt;select()&lt;/code&gt;, &lt;code&gt;filter()&lt;/code&gt;, and &lt;code&gt;arrange()&lt;/code&gt; let you quickly find information displayed within your data.&lt;/p&gt;
+&lt;p&gt;The next tutorial will show you how to derive information that is implied by your data, but not displayed within your data set.&lt;/p&gt;
+&lt;p&gt;In that tutorial, you will continue to use the &lt;code&gt;%&amp;gt;%&lt;/code&gt; operator, which is an essential part of programming with the&lt;/p&gt;
+&lt;p&gt;Pipes help make R expressive, like a spoken language. Spoken languages consist of simple words that you combine into sentences to create sophisticated thoughts.&lt;/p&gt;
+&lt;p&gt;In the tidyverse, functions are like words: each does one simple task well. You can combine these tasks into pipes with &lt;code&gt;%&amp;gt;%&lt;/code&gt; to perform complex, customized procedures.&lt;/p&gt;
+
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server-start&#34;&gt;
+library(learnr)
+library(tidyverse)
+library(babynames)
+
+checker &lt;- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
+  list(message = check_code, correct = TRUE, location = &#34;append&#34;)
+}
+tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
+knitr::opts_chunk$set(echo = FALSE)
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+learnr:::register_http_handlers(session, metadata = list(&#34;io.shinyapps.tutorials.02-isolating&#34;, 0.01))
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-select-1-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-select-1-code-editor`)), session)
+output$`tutorial-exercise-select-1-output` &lt;- renderUI({
+  `tutorial-exercise-select-1-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-select-2-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-select-2-code-editor`)), session)
+output$`tutorial-exercise-select-2-output` &lt;- renderUI({
+  `tutorial-exercise-select-2-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-filter-0-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-filter-0-code-editor`)), session)
+output$`tutorial-exercise-filter-0-output` &lt;- renderUI({
+  `tutorial-exercise-filter-0-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-filter-1a-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-filter-1a-code-editor`)), session)
+output$`tutorial-exercise-filter-1a-output` &lt;- renderUI({
+  `tutorial-exercise-filter-1a-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-filter-1b-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-filter-1b-code-editor`)), session)
+output$`tutorial-exercise-filter-1b-output` &lt;- renderUI({
+  `tutorial-exercise-filter-1b-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-filter-2-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-filter-2-code-editor`)), session)
+output$`tutorial-exercise-filter-2-output` &lt;- renderUI({
+  `tutorial-exercise-filter-2-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-filter-3-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-filter-3-code-editor`)), session)
+output$`tutorial-exercise-filter-3-output` &lt;- renderUI({
+  `tutorial-exercise-filter-3-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-filter-4-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-filter-4-code-editor`)), session)
+output$`tutorial-exercise-filter-4-output` &lt;- renderUI({
+  `tutorial-exercise-filter-4-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-arrange-1-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-arrange-1-code-editor`)), session)
+output$`tutorial-exercise-arrange-1-output` &lt;- renderUI({
+  `tutorial-exercise-arrange-1-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-arrange-2-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-arrange-2-code-editor`)), session)
+output$`tutorial-exercise-arrange-2-output` &lt;- renderUI({
+  `tutorial-exercise-arrange-2-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-arrange-3-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-arrange-3-code-editor`)), session)
+output$`tutorial-exercise-arrange-3-output` &lt;- renderUI({
+  `tutorial-exercise-arrange-3-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-arrange-4-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-arrange-4-code-editor`)), session)
+output$`tutorial-exercise-arrange-4-output` &lt;- renderUI({
+  `tutorial-exercise-arrange-4-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-arrange-5-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-arrange-5-code-editor`)), session)
+output$`tutorial-exercise-arrange-5-output` &lt;- renderUI({
+  `tutorial-exercise-arrange-5-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-pipe-1-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-pipe-1-code-editor`)), session)
+output$`tutorial-exercise-pipe-1-output` &lt;- renderUI({
+  `tutorial-exercise-pipe-1-result`()
+})
+&lt;/script&gt;
+ 
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;server&#34;&gt;
+`tutorial-exercise-your-name-1-result` &lt;- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-your-name-1-code-editor`)), session)
+output$`tutorial-exercise-your-name-1-output` &lt;- renderUI({
+  `tutorial-exercise-your-name-1-result`()
+})
+&lt;/script&gt;
+ &lt;!--html_preserve--&gt;
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;dependencies&#34;&gt;
+{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;jquery&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.11.3&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmd/h/jquery&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;jquery.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmarkdown&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.13&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;bootstrap&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;3.3.5&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmd/h/bootstrap&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;viewport&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;width=device-width, initial-scale=1&#34;]}]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;js/bootstrap.min.js&#34;,&#34;shim/html5shiv.min.js&#34;,&#34;shim/respond.min.js&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;css/cerulean.min.css&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmarkdown&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.13&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;highlightjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;9.12.0&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmd/h/highlightjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;highlight.js&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;textmate.css&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmarkdown&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.13&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/tutorial&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial.js&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial.css&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-autocompletion&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/tutorial&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-autocompletion.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-diagnostics&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/tutorial&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-diagnostics.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-format&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmarkdown/templates/tutorial/resources&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-format.js&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-format.css&#34;,&#34;rstudio-theme.css&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;jquery&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.11.3&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmd/h/jquery&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;jquery.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmarkdown&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.13&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;font-awesome&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;5.1.0&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmd/h/fontawesome&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;css/all.css&#34;,&#34;css/v4-shims.css&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmarkdown&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.13&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;bootbox&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;4.4.0&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/bootbox&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;bootbox.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;localforage&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/localforage&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;localforage.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/tutorial&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial.js&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial.css&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-autocompletion&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/tutorial&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-autocompletion.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-diagnostics&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/tutorial&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-diagnostics.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;htmlwidgets&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.3&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;www&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;htmlwidgets.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;htmlwidgets&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.3&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;quiz-binding&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;htmlwidgets&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;quiz.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[false]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;jquery&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.11.3&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmd/h/jquery&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;jquery.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmarkdown&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.13&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;bootstrap&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;3.3.5&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmd/h/bootstrap&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;viewport&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;width=device-width, initial-scale=1&#34;]}]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;js/bootstrap.min.js&#34;,&#34;shim/html5shiv.min.js&#34;,&#34;shim/respond.min.js&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;css/bootstrap.min.css&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;rmarkdown&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.13&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;bootbox&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;4.4.0&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/bootbox&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;bootbox.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;localforage&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/localforage&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;localforage.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/tutorial&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial.js&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial.css&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-autocompletion&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/tutorial&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-autocompletion.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-diagnostics&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/tutorial&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;tutorial-diagnostics.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;slickquiz&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.20&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;htmlwidgets/lib/slickquiz&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;js/slickQuiz.js&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;css/slickQuiz.css&#34;,&#34;css/slickQuizTutorial.css&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.2.6&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/ace&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;ace.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;name&#34;,&#34;version&#34;,&#34;src&#34;,&#34;meta&#34;,&#34;script&#34;,&#34;stylesheet&#34;,&#34;head&#34;,&#34;attachment&#34;,&#34;package&#34;,&#34;all_files&#34;,&#34;pkgVersion&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;html_dependency&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboardjs&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;1.5.15&#34;]},{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;file&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;lib/clipboardjs&#34;]}]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;clipboard.min.js&#34;]},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;NULL&#34;},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;learnr&#34;]},{&#34;type&#34;:&#34;logical&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[true]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.9.2.1&#34;]}]}]}
+&lt;/script&gt;
+&lt;!--/html_preserve--&gt;
+&lt;!--html_preserve--&gt;
+&lt;script type=&#34;application/shiny-prerendered&#34; data-context=&#34;execution_dependencies&#34;&gt;
+{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;packages&#34;]}},&#34;value&#34;:[{&#34;type&#34;:&#34;list&#34;,&#34;attributes&#34;:{&#34;names&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;packages&#34;,&#34;version&#34;]},&#34;class&#34;:{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;data.frame&#34;]},&#34;row.names&#34;:{&#34;type&#34;:&#34;integer&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77]}},&#34;value&#34;:[{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;assertthat&#34;,&#34;babynames&#34;,&#34;backports&#34;,&#34;base&#34;,&#34;broom&#34;,&#34;cellranger&#34;,&#34;cli&#34;,&#34;colorspace&#34;,&#34;compiler&#34;,&#34;crayon&#34;,&#34;datasets&#34;,&#34;digest&#34;,&#34;dplyr&#34;,&#34;evaluate&#34;,&#34;fansi&#34;,&#34;forcats&#34;,&#34;generics&#34;,&#34;ggplot2&#34;,&#34;glue&#34;,&#34;graphics&#34;,&#34;grDevices&#34;,&#34;grid&#34;,&#34;gtable&#34;,&#34;haven&#34;,&#34;hms&#34;,&#34;htmltools&#34;,&#34;htmlwidgets&#34;,&#34;httpuv&#34;,&#34;httr&#34;,&#34;jsonlite&#34;,&#34;knitr&#34;,&#34;labeling&#34;,&#34;later&#34;,&#34;lattice&#34;,&#34;lazyeval&#34;,&#34;learnr&#34;,&#34;lifecycle&#34;,&#34;lubridate&#34;,&#34;magrittr&#34;,&#34;markdown&#34;,&#34;methods&#34;,&#34;mime&#34;,&#34;modelr&#34;,&#34;munsell&#34;,&#34;nlme&#34;,&#34;pillar&#34;,&#34;pkgconfig&#34;,&#34;promises&#34;,&#34;purrr&#34;,&#34;R6&#34;,&#34;Rcpp&#34;,&#34;readr&#34;,&#34;readxl&#34;,&#34;rlang&#34;,&#34;rmarkdown&#34;,&#34;rprojroot&#34;,&#34;rstudioapi&#34;,&#34;rvest&#34;,&#34;scales&#34;,&#34;shiny&#34;,&#34;stats&#34;,&#34;stringi&#34;,&#34;stringr&#34;,&#34;tibble&#34;,&#34;tidyr&#34;,&#34;tidyselect&#34;,&#34;tidyverse&#34;,&#34;tools&#34;,&#34;utf8&#34;,&#34;utils&#34;,&#34;vctrs&#34;,&#34;withr&#34;,&#34;xfun&#34;,&#34;xml2&#34;,&#34;xtable&#34;,&#34;yaml&#34;,&#34;zeallot&#34;]},{&#34;type&#34;:&#34;character&#34;,&#34;attributes&#34;:{},&#34;value&#34;:[&#34;0.2.1&#34;,&#34;1.0.0&#34;,&#34;1.1.5&#34;,&#34;3.6.0&#34;,&#34;0.5.2&#34;,&#34;1.1.0&#34;,&#34;1.1.0&#34;,&#34;1.4-1&#34;,&#34;3.6.0&#34;,&#34;1.3.4&#34;,&#34;3.6.0&#34;,&#34;0.6.21&#34;,&#34;0.8.3&#34;,&#34;0.14&#34;,&#34;0.4.0&#34;,&#34;0.4.0&#34;,&#34;0.0.2&#34;,&#34;3.2.1&#34;,&#34;1.3.1&#34;,&#34;3.6.0&#34;,&#34;3.6.0&#34;,&#34;3.6.0&#34;,&#34;0.3.0&#34;,&#34;2.1.0&#34;,&#34;0.4.2&#34;,&#34;0.3.6&#34;,&#34;1.3&#34;,&#34;1.5.1&#34;,&#34;1.4.0&#34;,&#34;1.6&#34;,&#34;1.25&#34;,&#34;0.3&#34;,&#34;0.8.0&#34;,&#34;0.20-38&#34;,&#34;0.2.2&#34;,&#34;0.9.2.1&#34;,&#34;0.1.0&#34;,&#34;1.7.4&#34;,&#34;1.5&#34;,&#34;1.1&#34;,&#34;3.6.0&#34;,&#34;0.7&#34;,&#34;0.1.4&#34;,&#34;0.5.0&#34;,&#34;3.1-139&#34;,&#34;1.4.2&#34;,&#34;2.0.3&#34;,&#34;1.0.1&#34;,&#34;0.3.2&#34;,&#34;2.4.0&#34;,&#34;1.0.2&#34;,&#34;1.3.1&#34;,&#34;1.3.1&#34;,&#34;0.4.0.9002&#34;,&#34;1.13&#34;,&#34;1.3-2&#34;,&#34;0.10&#34;,&#34;0.3.4&#34;,&#34;1.0.0&#34;,&#34;1.3.2&#34;,&#34;3.6.0&#34;,&#34;1.4.3&#34;,&#34;1.4.0&#34;,&#34;2.1.3&#34;,&#34;1.0.0&#34;,&#34;0.2.5&#34;,&#34;1.2.1&#34;,&#34;3.6.0&#34;,&#34;1.1.4&#34;,&#34;3.6.0&#34;,&#34;0.2.0.9003&#34;,&#34;2.1.2&#34;,&#34;0.10&#34;,&#34;1.2.0&#34;,&#34;1.8-4&#34;,&#34;2.2.0&#34;,&#34;0.1.0&#34;]}]}]}
+&lt;/script&gt;
+&lt;!--/html_preserve--&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt; &lt;!-- topics --&gt;
+
+&lt;div class=&#34;topicsContainer&#34;&gt;
+&lt;div class=&#34;topicsPositioner&#34;&gt;
+&lt;div class=&#34;band&#34;&gt;
+&lt;div class=&#34;bandContent topicsListContainer&#34;&gt;
+
+&lt;!-- begin doc-metadata --&gt;
+&lt;div id=&#34;doc-metadata&#34;&gt;
+&lt;h2 class=&#34;title toc-ignore&#34; style=&#34;display:none;&#34;&gt;Isolating Data with dplyr&lt;/h2&gt;
+&lt;/div&gt;
+&lt;!-- end doc-metadata --&gt;
+
+&lt;/div&gt; &lt;!-- bandContent.topicsListContainer --&gt;
+&lt;/div&gt; &lt;!-- band --&gt;
+&lt;/div&gt; &lt;!-- topicsPositioner --&gt;
+&lt;/div&gt; &lt;!-- topicsContainer --&gt;
+
+
+&lt;/div&gt; &lt;!-- bandContent page --&gt;
+&lt;/div&gt; &lt;!-- pageContent band --&gt;
+
+
+
+
+&lt;script&gt;
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $(&#39;tr.header&#39;).parent(&#39;thead&#39;).parent(&#39;table&#39;).addClass(&#39;table table-condensed&#39;);
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+&lt;/script&gt;
+
+
+&lt;!-- dynamically load mathjax for compatibility with self-contained --&gt;
+&lt;script&gt;
+  (function () {
+    var script = document.createElement(&#34;script&#34;);
+    script.type = &#34;text/javascript&#34;;
+    script.src  = &#34;https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;;
+    document.getElementsByTagName(&#34;head&#34;)[0].appendChild(script);
+  })();
+&lt;/script&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>

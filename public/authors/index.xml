@@ -5,7 +5,7 @@
     <link>/authors/</link>
       <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 05 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 27 Oct 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Authors</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Connor French</title>
       <link>/authors/connor-french/</link>
-      <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       <guid>/authors/connor-french/</guid>
       <description></description>
     </item>
@@ -74,6 +74,46 @@
       <link>/authors/michael-s.-deutsch/</link>
       <pubDate>Tue, 21 May 2019 00:00:00 +0000</pubDate>
       <guid>/authors/michael-s.-deutsch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Joseph R. Bennett</title>
+      <link>/authors/joseph-r.-bennett/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/joseph-r.-bennett/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Daniel I. Bolnick</title>
+      <link>/authors/daniel-i.-bolnick/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/authors/daniel-i.-bolnick/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Krista L Jäger</title>
+      <link>/authors/krista-l-jager/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/authors/krista-l-jager/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Travis Ingram</title>
+      <link>/authors/travis-ingram/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/authors/travis-ingram/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vanessa Kilborn</title>
+      <link>/authors/vanessa-kilborn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/authors/vanessa-kilborn/</guid>
       <description></description>
     </item>
     

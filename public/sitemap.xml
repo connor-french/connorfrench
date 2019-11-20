@@ -33,12 +33,57 @@
   </url>
   
   <url>
-    <loc>/tags/atlantic-forest/</loc>
-    <lastmod>2019-10-05T20:04:27-04:00</lastmod>
+    <loc>/post/leaflet-tutorial/</loc>
+    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/authors/</loc>
+    <lastmod>2019-10-27T20:04:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/connor-french/</loc>
+    <lastmod>2019-10-27T20:04:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/genetics/</loc>
+    <lastmod>2019-10-27T20:04:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/global/</loc>
+    <lastmod>2019-10-27T20:04:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/insects/</loc>
+    <lastmod>2019-10-27T20:04:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/global-popgen/</loc>
+    <lastmod>2019-10-27T20:04:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/</loc>
+    <lastmod>2019-10-27T20:04:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-10-27T20:04:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/atlantic-forest/</loc>
     <lastmod>2019-10-05T20:04:27-04:00</lastmod>
   </url>
   
@@ -48,23 +93,13 @@
   </url>
   
   <url>
-    <loc>/authors/connor-french/</loc>
-    <lastmod>2019-10-05T20:04:27-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/gcdi/</loc>
-    <lastmod>2019-10-05T13:36:22-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/gcdi/</loc>
     <lastmod>2019-10-05T13:36:22-04:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/genetics/</loc>
-    <lastmod>2019-10-05T20:04:27-04:00</lastmod>
+    <loc>/categories/gcdi/</loc>
+    <lastmod>2019-10-05T13:36:22-04:00</lastmod>
   </url>
   
   <url>
@@ -83,23 +118,8 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2019-10-05T13:36:22-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/</loc>
-    <lastmod>2019-10-05T20:04:27-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/research/</loc>
     <lastmod>2019-10-05T13:36:22-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-10-05T20:04:27-04:00</lastmod>
   </url>
   
   <url>
@@ -203,6 +223,26 @@
   </url>
   
   <url>
+    <loc>/tags/bioinformatics/</loc>
+    <lastmod>2017-12-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/joseph-r.-bennett/</loc>
+    <lastmod>2017-12-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/peerj_2017_sdmtoolbox/</loc>
+    <lastmod>2017-12-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/species-distribution-modeling/</loc>
+    <lastmod>2017-12-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/deep-learning/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url>
@@ -228,7 +268,56 @@
   </url>
   
   <url>
+    <loc>/courses/r_trial/02-isolating/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/courses/</loc>
+  </url>
+  
+  <url>
+    <loc>/authors/daniel-i.-bolnick/</loc>
+  </url>
+  
+  <url>
+    <loc>/publication/herpreview_2017_diadophis-diet/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/ecology/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/fish/</loc>
+  </url>
+  
+  <url>
+    <loc>/publication/peerj_2018_stickleback/</loc>
+  </url>
+  
+  <url>
+    <loc>/authors/krista-l-jager/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/natural-history/</loc>
+  </url>
+  
+  <url>
+    <loc>/publication/mesoherp_2017_juliani_vocalization/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/snakes/</loc>
+  </url>
+  
+  <url>
+    <loc>/authors/travis-ingram/</loc>
+  </url>
+  
+  <url>
+    <loc>/authors/vanessa-kilborn/</loc>
   </url>
   
 </urlset>

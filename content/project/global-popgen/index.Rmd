@@ -1,0 +1,22 @@
+---
+title: Population genetics on a global scale
+author: Connor French
+date: '2019-10-27'
+slug: global-popgen
+categories: []
+tags:
+  - Global
+  - Genetics
+  - Insects
+subtitle: ''
+summary: ''
+authors: [Connor French]
+lastmod: '2019-10-27T20:04:27-04:00'
+featured: no
+image:
+  caption: 'Screenshot of [GBIF](https://www.gbif.org/) sampling map.'
+  focal_point: Smart
+  #preview_only: no
+projects: []
+---
+The rapid accumulation of publicly available biodiversity data has been a catalyst for cross-scale research. 
