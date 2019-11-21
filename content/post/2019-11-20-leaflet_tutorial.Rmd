@@ -7,7 +7,7 @@ slug: leaflet-tutorial
 output: html_document
 links:
   - name: Originally published on GC Digital Initiatives
-  - url: https://digitalfellows.commons.gc.cuny.edu/2019/11/20/interactively-ex…-r-using-leaflet/
+  - url: https://digitalfellows.commons.gc.cuny.edu/2019/11/21/interactively-explore-geographic-data-in-r-using-leaflet/
 ---
 
 ### Why leaflet?
