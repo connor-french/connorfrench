@@ -36,16 +36,13 @@ The structure of RStudio Cloud is as follows:
 You can find a detailed and readable guide [here](https://rstudio.cloud/learn/guide)! If you are not quite sure this is for you, below is a typical use case, containing only the essential details.  
 
 You first set up a **private space** and determine who can access the space. As an *administrator*, you can manage membership and can view, edit, and manage all projects in the space. When you add users to the space, their default position is a *contributor*- they can create, manage, and edit their own projects. If you are fortunate to have a teaching assistant, you can change their permission to *moderator*, giving them permission to view, manage, and edit all projects in the space. Note- administrators and moderators can edit other users’ projects, but they can only do this when the user has closed the project. Otherwise, you’ll get this error:  
-![](images/disconnected.png)
+![](https://github.com/connor-french/connorfrench/raw/master/content/post/images/disconnected.png)
 
 You first create a **project** within this space and populate it with files, packages, and code that you want students to access. When you are ready to distribute the project, you then change the permissions to allow everyone in the space access and select the option to make this project an assignment. Assignments make it easy for students to obtain their own copy of the project (this includes files, packages, and code), which they do by clicking on the assignments link. They can then edit their own copy, interacting with the R script exactly like they would on their personal computer. All users have the ability to download files to their personal computer if they choose.  
 
 The working environment for a user looks like a typical RStudio window:  
-![](images/workspace_ss.png)
+![](https://github.com/connor-french/connorfrench/raw/master/content/post/images/workspace_ss.png)
 
 And that’s it! There is plenty more detailed discussion of RStudio Cloud’s capabilities and options [here](https://rstudio.cloud/learn/guide).  
 
 There are a few notable limitations to RStudio Cloud. It is in beta, so there may be some instabilities. Feedback is generally positive, and most recommendations are to save often in case the session crashes, which is rare. The initial member limit for workspaces is 10 members, but all requests for more space are honored (anecdotally, classroom sizes > 100 students are possible). Each project copy is given 1 GB of memory and 1 CPU, so large data possibilities are limited. If your course requires large computational resources and you have these available locally or through a paid cloud service, [RStudio Server](https://rstudio.com/products/rstudio/#rstudio-server) may be another viable option. Development is happening rapidly, so more features will likely be available soon!
-
------
-Featured image: Logo for R, introduced in 2016. Credit: https://de.wikipedia.org/wiki/R_(Programmiersprache)#/media/Datei:R_logo.svg
