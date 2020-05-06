@@ -1,7 +1,7 @@
 ---
 title: RStudio Cloud for Education
 author: Connor French
-date: '2020-05-07'
+date: '2020-05-06'
 slug: rstudio-cloud-for-education
 categories:
   - GCDI
