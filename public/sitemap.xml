@@ -33,12 +33,47 @@
   </url>
   
   <url>
-    <loc>/post/leaflet-tutorial/</loc>
-    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
+    <loc>/categories/</loc>
+    <lastmod>2020-05-06T10:00:01-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/gcdi/</loc>
+    <lastmod>2020-05-06T10:00:01-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/gcdi/</loc>
+    <lastmod>2020-05-06T10:00:01-04:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
+    <lastmod>2020-05-06T10:00:01-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2020-05-06T10:00:01-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/rstudio-cloud-for-education/</loc>
+    <lastmod>2020-05-06T10:00:01-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-05-06T10:00:01-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/teaching/</loc>
+    <lastmod>2020-05-06T10:00:01-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/leaflet-tutorial/</loc>
     <lastmod>2019-11-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -78,28 +113,8 @@
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-10-27T20:04:27-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/atlantic-forest/</loc>
     <lastmod>2019-10-05T20:04:27-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2019-10-05T13:36:22-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/gcdi/</loc>
-    <lastmod>2019-10-05T13:36:22-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/gcdi/</loc>
-    <lastmod>2019-10-05T13:36:22-04:00</lastmod>
   </url>
   
   <url>
