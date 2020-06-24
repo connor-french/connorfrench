@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-bio: I am interested in understanding population genetics processes and patterns at different spatial scales.
+bio: I am interested in understanding population responses to changing environments. [Support BIPOC in STEM.](https://www.shutdownstem.com/)
 education:
   courses:
   - course: PhD in Biology- Ecology, Evolution, and Behavior
@@ -46,4 +46,4 @@ user_groups:
 - Visitors
 ---
 
-I am a PhD student in the [Mike Hickerson](https://hickerlab.wordpress.com/) and [Ana Carnaval](https://carnavallab.org) labs at the City University of New York, City College campus, supported as a [Graduate Center Digital Fellow](https://digitalfellows.commons.gc.cuny.edu/). I'm working to understand population genetic patterns and processes at different spatial scales. 
+I am a PhD student in the [Mike Hickerson](https://hickerlab.wordpress.com/) and [Ana Carnaval](https://carnavallab.org) labs at the City University of New York, City College campus, supported as a [Graduate Center Digital Fellow](https://digitalfellows.commons.gc.cuny.edu/). I am interested in understanding how populations evolve in response to changing environments. [Support BIPOC in STEM.](https://www.shutdownstem.com/)
