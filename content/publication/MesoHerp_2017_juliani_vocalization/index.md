@@ -4,7 +4,7 @@ authors:
 - admin
 - Vanessa Kilborn
 - Krista L Jäger
-date: '2017-05'
+date: 2017-05
 doi: ""
 featured: false
 image:
@@ -16,7 +16,7 @@ publication: '*Mesoamerican Herpetology* (4, 1)'
 publication_short: ""
 publication_types:
 - "2"
-publishDate: '2017-05'
+publishDate: 2017-05
 slides: ""
 summary: ""
 tags:

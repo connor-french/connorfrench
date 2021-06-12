@@ -2,7 +2,7 @@
 abstract: ""
 authors:
 - admin
-date: '2017-06'
+date: 2017-06
 doi: ""
 featured: false
 image:
@@ -14,7 +14,7 @@ publication: '*Herpetological Review* (48, 2)'
 publication_short: ""
 publication_types:
 - "2"
-publishDate: '2017-06'
+publishDate: 2017-06
 slides: ""
 summary: ""
 tags:
