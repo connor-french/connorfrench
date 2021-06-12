@@ -4,7 +4,6 @@ authors:
 - admin
 - Travis Ingram
 - Daniel I. Bolnick
-
 date: 2018-16-05
 doi: "https://doi.org/10.7717/peerj.4807"
 featured: false

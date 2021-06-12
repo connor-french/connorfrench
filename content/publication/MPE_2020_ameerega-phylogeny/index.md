@@ -14,8 +14,7 @@ authors:
 - Serrano-Rojas, S.J.
 - Whitworth, A.
 - Brown, J.L.
-
-date: 2020-01
+date: 2020-01-01
 doi: "https://doi.org/10.1016/j.ympev.2019.106638"
 featured: false
 image:
@@ -27,7 +26,7 @@ publication: '*Molecular Phylogenetics and Evolution* (142, 106638)'
 publication_short: ""
 publication_types:
   - "2"
-publishDate: 2020-01
+publishDate: 2020-01-01
 slides: ""
 summary: ""
 tags:
