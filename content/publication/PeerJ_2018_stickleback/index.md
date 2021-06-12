@@ -4,7 +4,7 @@ authors:
 - admin
 - Travis Ingram
 - Daniel I. Bolnick
-date: 2018-16-05
+date: 2018-05-16
 doi: "https://doi.org/10.7717/peerj.4807"
 featured: false
 image:
@@ -16,7 +16,7 @@ publication: '*PeerJ* (6:e4807)'
 publication_short: ""
 publication_types:
   - "2"
-publishDate: 2018-16-05
+publishDate: 2018-05-16
 slides: ""
 summary: ""
 tags:
