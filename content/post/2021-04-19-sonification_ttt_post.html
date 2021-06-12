@@ -1,0 +1,101 @@
+---
+title: Sonification for data communication
+author: Connor French
+date: '2021-04-19'
+slug: sonification-for-data-communication
+categories:
+  - GCDI
+tags:
+  - R
+  - Research
+  - Data Visualization
+  - GCDI
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2021-04-19T10:00:01-04:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+links:
+  - name: Originally published on GC Digital Initiatives
+  - url: https://digitalfellows.commons.gc.cuny.edu/2021/04/19/sonification-for-data-communication/
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>A few weeks ago my partner shared a <a href="https://www.youtube.com/watch?v=-hY9QSdaReY">TED Talk</a> with me that changed how I conceptualize data communication. In it <a href="https://www.ted.com/speakers/wanda_diaz_merced">Dr. Wanda Diaz Merced</a>, an astronomer who lost her eyesight in her early twenties, discusses her journey back into science after this setback. A crucial technique helped her interpret hefty astronomy data sets- sonification. <a href="https://handbook.floeproject.org/sonification">Sonification turns data into sound</a>. It is analogous to data visualization, where both methods aim to communicate patterns and relationships within data clearly and efficiently. Not only did sonification make data accessible for Dr. Merced, it helped her uncover patterns obscured by visualizing graphs and charts.</p>
+<p>There are <a href="https://www.techfak.uni-bielefeld.de/ags/ami/publications/media/Hermann2002-SFE.pdf">quite a few applications</a> for sonification. The bing you get when an email lands in your inbox is one familiar example. The recognizable noise conveys a simple piece of information without requiring you to be sitting at the computer or staring at your phone. Representing large data sets gets a little more complicated.</p>
+<p>Audio has multiple dimensions that can be exploited to represent information, including:</p>
+<ul>
+<li>pitch<br />
+</li>
+<li>loudness<br />
+</li>
+<li>duration<br />
+</li>
+<li>spatial arrangement (e.g. stereo panning)</li>
+</ul>
+<p>These can be combined to represent multiple data dimensions or used interchangeably to represent the same data in a new way. Best practices are still being formed and are often context-dependent on the user, but a great resource for the latest practices is the <a href="https://handbook.floeproject.org/sonification">Floe Inclusive Learning Design Handbook</a>.</p>
+<p>A particular application that is relevant for folks who want to increase the accessibility of their publications is to sonify their existing data visualizations. Below are a few common examples. Each example is a visualization, followed by the sonification. I have chosen to represent values on the y-axis as changes in pitch, while time indicates change along the x-axis. To emphasize the change in time along the x-axis, I have added short white noise pulses for each data point along the x-axis. The listener is “reading” the plot from left to right.</p>
+<p>A common data visualization technique for single variables is the histogram. These emphasize the distribution of the variable under consideration. Below, I’ve simulated data representing my mood 15 minutes before eating dinner over the last several weeks.</p>
+<br>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="/post/2021-04-19-sonification_ttt_post_files/figure-html/unnamed-chunk-2-1.png" alt="A histogram representing the distribution of mood score values." width="480" />
+<p class="caption">
+Figure 1: A histogram representing the distribution of mood score values.
+</p>
+</div>
+<br>
+<html>
+<audio controls>
+<source src="audio/sound_univariate.wav" type="audio/wav">
+</audio>
+</html>
+<p><br>
+<br>
+Notice how the pitch oscillates in a similar manner to the shape of the distribution and the pulses are evenly spaced, representing the bins of the distribution!</p>
+<p><br>
+Now, let’s sonify two variables at once! The visualization below is a scatterplot, a common technique for two continuous variables. The data is simulated to represent how much I crave a burger depending on how hungry I am.<br />
+<br></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="/post/2021-04-19-sonification_ttt_post_files/figure-html/unnamed-chunk-5-1.png" alt="A scatterplot representing a linear relationship between two variables. Hunger level on the x axis and burger craving strength on the y axis" width="480" />
+<p class="caption">
+Figure 2: A scatterplot representing a linear relationship between two variables. Hunger level on the x axis and burger craving strength on the y axis
+</p>
+</div>
+<br>
+<html>
+<audio controls>
+<source src="audio/sound_linear.wav" type="audio/wav">
+</audio>
+</html>
+<p><br>
+<br></p>
+<p>Notice how the pitch increase with time, but there are oscillations which represent error around a perfect linear relationship. Also notice how the pulses are less even- the points aren’t evenly distributed on the x-axis. Pretty cool!</p>
+<p><br></p>
+<p>The final visualization I’ll present is an exponential relationship between two variables. The simulated data in this scenario represents my craving for a big ol’ plate of nachos dependent on how hungry I am.</p>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="/post/2021-04-19-sonification_ttt_post_files/figure-html/unnamed-chunk-8-1.png" alt="A scatterplot representing an exponential relationship between two variables. Hunger level on the x axis and burger craving strength on the y axis" width="480" />
+<p class="caption">
+Figure 3: A scatterplot representing an exponential relationship between two variables. Hunger level on the x axis and burger craving strength on the y axis
+</p>
+</div>
+<br>
+<html>
+<audio controls>
+<source src="audio/sound_exponential.wav" type="audio/wav">
+</audio>
+</html>
+<p><br>
+<br></p>
+<p>In this case, the pitch increases, well, exponentially! In addition, the points are tighter together- The pitch oscillates less than the linearly related data. My nacho cravings are pretty consistent.</p>
+<p><br></p>
+<p>These are just a few ways sonification can be incorporated into your data communication and exploration arsenal. Besides making data more accessible to those who are blind or low vision, sonification opens up another avenue of data exploration to uncover patterns not evident in a visßual medium. Dr. Merced was able to <a href="https://youtu.be/-hY9QSdaReY?t=287">hear a distinct frequency pattern</a> not evident from a chart that led her to discover that star formation likely plays an important part in supernova explosions! Sighted astronomers now use sonfication as a complement to visualization to investigate their data. If you would like to take a crack at sonification yourself, there are a <a href="https://osf.io/vgaxh/wiki/Resources/">variety</a> of <a href="https://jarednielsen.medium.com/data-sonification-and-web-scraping-with-node-js-and-tone-js-eaf2cd35a000">resources</a>. The sonifications for this post were created using the R package <a href="https://cran.r-project.org/web/packages/sonify/index.html">sonify</a>, which is a straightforward interface that will get you there quickly, without much overhead. You can find the R code for this blog post <a href="https://raw.githubusercontent.com/connor-french/sonification_ttt_post/main/sonification_ttt_post.Rmd">here</a>.</p>
+<p><br></p>
+<p>Those of us at the <a href="https://gcdi.commons.gc.cuny.edu/">Graduate Center Digital Initiatives</a> strive to make interactions with digital media more accessible. We provide a variety of resources to take advantage of digital tools in your research. In addition, we provide community and support with the <a href="https://digitalfellows.commons.gc.cuny.edu/">Digital Fellows</a>, so I encourage you to take a look and connect with us!</p>
